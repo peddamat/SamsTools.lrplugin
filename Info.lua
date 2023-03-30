@@ -1,12 +1,12 @@
--- Photo Info Dumper Lightroom Plug-in
+-- Sam's Lightroom Plug-in
 --
--- @copyright 2020 LiosK
--- @license: Apache-2.0
+-- @copyright 2022 peddamat
+-- @license: TBD
 return {
   LrSdkVersion = 10.0,
-  LrToolkitIdentifier = "net.liosk.lightroom.PhotoInfoDumper",
-  LrPluginName = "Photo Info Dumper",
-  LrPluginInfoUrl = "https://github.com/LiosK/PhotoInfoDumper.lrplugin",
+  LrToolkitIdentifier = "net.tbd.lightroom.SamsTools",
+  LrPluginName = "Sam's Tools",
+  LrPluginInfoUrl = "",
   VERSION = {
     major = 0,
     minor = 1,
@@ -14,20 +14,16 @@ return {
   },
   LrLibraryMenuItems = {
     {
-      title = "Dump Metadata for All Photos...",
-      file = "DumpMetadataAll.lua",
+      title = "Automatically create collections...",
+      file = "AutoCollections.lua",
     },
     {
-      title = "Dump Metadata for Selected Photos...",
-      file = "DumpMetadataSelected.lua",
+      title = "Export File List for Selected Collection(s)...",
+      file = "ExportFileListSelected.lua",
     },
     {
-      title = "Dump Collection Contents...",
-      file = "DumpCollections.lua",
-    },
-    {
-      title = "Dump Publish Service Collections...",
-      file = "DumpPublishServices.lua",
+      title = "Export Photos from Selected Collection(s)...",
+      file = "ExportFilesSelected.lua",
     },
   },
 }

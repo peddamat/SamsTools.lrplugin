@@ -5,13 +5,14 @@ local LrDialogs = import "LrDialogs"
 local LrFunctionContext = import "LrFunctionContext"
 local LrProgressScope = import "LrProgressScope"
 
+
 LrFunctionContext.postAsyncTaskWithContext("DumpMetadataSelected", function(context)
   LrDialogs.attachErrorDialogToFunctionContext(context)
 
   -- show save dialog and open file to write
-  local fh = common.open_file()
-  if fh == nil then return end
-  context:addCleanupHandler(function() fh:close() end)
+  -- local fh = common.open_file()
+  -- if fh == nil then return end
+  -- context:addCleanupHandler(function() fh:close() end)
 
   -- retrieve target photo list
   local catalog = LrApplication.activeCatalog()
@@ -37,6 +38,6 @@ LrFunctionContext.postAsyncTaskWithContext("DumpMetadataSelected", function(cont
   progress:setCaption("Saving dump as JSON")
   local result = common.build_photo_dump(photos, batch_raw, batch_formatted)
   if progress:isCanceled() then return end
-  fh:write(json.encode(result))
+  -- fh:write(json.encode(result))
   progress:setPortionComplete(3, 3)
 end)

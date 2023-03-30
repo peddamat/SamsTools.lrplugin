@@ -1,5 +1,32 @@
 local common = {}
 
+local LrLogger = import 'LrLogger'
+
+-- Create the logger and enable the print function.
+local myLogger = LrLogger( 'exportLogger' )
+-- myLogger:enable( "print" ) -- Pass either a string or a table of actions.
+myLogger:enable( "logfile" ) -- Pass either a string or a table of actions.
+
+--------------------------------------------------------------------------------
+-- Write trace information to the logger.
+
+local function outputToLog( message )
+	myLogger:trace( message )
+end
+
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 -- Show save dialog and open file to write.
 function common.open_file()
   local filename = import("LrDialogs").runSavePanel({
@@ -45,6 +72,8 @@ function common.build_photo_dump(photos, batch_raw, batch_formatted)
         r.keywords[k] = v:getName()
       end
     end
+
+    outputToLog( dump(r) )
 
     result[r.uuid] = { raw = r, formatted = f }
   end
